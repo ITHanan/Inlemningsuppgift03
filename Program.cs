@@ -34,7 +34,7 @@ namespace Inlemningsuppgift03
                  
                     case 1:
 
-                        librarySystem.Addnewbook(minLillaDB.AllbooksfromDB,minLillaDB.allaAuthorsDatafromDB);
+                        librarySystem.Addnewbook(minLillaDB.AllbooksfromDB);
                         break;
                     case 2:
                         librarySystem.AddnewAuthor(minLillaDB.allaAuthorsDatafromDB);
@@ -64,12 +64,13 @@ namespace Inlemningsuppgift03
                         librarySystem.SearchAndFillterBooks(minLillaDB.AllbooksfromDB, minLillaDB.allaAuthorsDatafromDB); 
                         break;
                     case 9:
-                        
-                        break;
-                    case 10:
+                        librarySystem.SaveAllDataAndExit();
 
-                        librarySystem.AddRatingToBook();
                         break;
+                    //case 10:
+
+                    //    librarySystem.AddRatingToBook();
+                    //    break;
 
                     case 11:
                         librarySystem.SaveAllDataAndExit();

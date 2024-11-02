@@ -28,13 +28,14 @@ namespace Inlemningsuppgift03
         public LibrarySystem() 
         {
 
-            DataLoading(books,authors);
+            DataLoading();
         
         }
 
 
-        public void Addnewbook(List<Book>books, List<Author>authors) 
+        public void Addnewbook(List<Book>books) 
         {
+
             Console.WriteLine("------Please, enter all book's details------\n");
             Console.WriteLine("Enter book title:");
             string newBookTitle = Console.ReadLine()!;
@@ -42,9 +43,21 @@ namespace Inlemningsuppgift03
             Console.WriteLine("Enter author name:");
             string newAuthorName = Console.ReadLine()!;
 
+            var author = authors.FirstOrDefault(author => author.AuthorName.Equals(newAuthorName, StringComparison.OrdinalIgnoreCase));
+
+            if (author == null)
+            {
+
+                Console.WriteLine("The author not found. Add the Author first ");
+                return;
+
+            }
+
+
             Console.WriteLine("Enter genre:");
             string newGenre = Console.ReadLine()!;
 
+            
             Console.WriteLine("Enter Published Year:");
             int newPublishedYear = Convert.ToInt32( Console.ReadLine())!;
 
@@ -53,15 +66,7 @@ namespace Inlemningsuppgift03
 
 
 
-            var author = authors.FirstOrDefault(author => author.AuthorName.Equals(newAuthorName, StringComparison.OrdinalIgnoreCase));
-
-            if (newAuthorName == null) 
-            {
-
-                Console.WriteLine("The author not found. Add the Author first ");
-                return;
-            
-            }
+           
             Book newBook = new(books.Count + 1, newBookTitle, newAuthorName, newGenre, newPublishedYear, newISBNCode, [4])
             {
 
@@ -75,9 +80,10 @@ namespace Inlemningsuppgift03
             };
 
             books.Add(newBook);
-            // author.booksIsWritten.Add(newBook.BookId);
+           author.booksIsWritten.Add(newBook.BookId);
+           SaveAllDataAndExit();
             MirrorChangesToProjectRoot("LibraryData.json");
-            SaveAllDataAndExit();
+
             Console.WriteLine($"The book {newBookTitle} added successfully.");
 
         }
@@ -102,8 +108,9 @@ namespace Inlemningsuppgift03
             };
 
             authors.Add(newAuthor);
-            MirrorChangesToProjectRoot("LibraryData.json");
             SaveAllDataAndExit();
+            MirrorChangesToProjectRoot("LibraryData.json");
+
             Console.WriteLine("Auther added successfully");
         
     
@@ -124,7 +131,9 @@ namespace Inlemningsuppgift03
               book.Genre = Prompt($"Enter new genre of {book.Genre}:", book.Genre);
               book.PublishedYear = int.Parse(Prompt($"Enter new publication year of the current {book.PublishedYear}:", book.PublishedYear.ToString()));
             SaveAllDataAndExit();
-             Console.WriteLine("Book details updated");
+            MirrorChangesToProjectRoot("LibraryData.json");
+
+            Console.WriteLine("Book details updated");
         }
         public void UpdateAuthorDetails(List<Author> authors) 
         {
@@ -137,9 +146,10 @@ namespace Inlemningsuppgift03
             }
              author.AuthorName =Prompt($"Enter new Author corrent name is: {author.AuthorName}:",author.AuthorName);
              author.AuthorsCountry = Prompt($"Enter new country corrent country is {author.AuthorsCountry}", author.AuthorsCountry);
-            MirrorChangesToProjectRoot("LibraryData.json");
             SaveAllDataAndExit();
-             Console.WriteLine("Author has been updated.");
+            MirrorChangesToProjectRoot("LibraryData.json");
+
+            Console.WriteLine("Author has been updated.");
         
         }
 
@@ -159,12 +169,13 @@ namespace Inlemningsuppgift03
 
             books.Remove(book);
             var author = authors.FirstOrDefault(author => author.AuthorName == book.AuthorName);
-            if (author == null) 
+            if (author != null) 
             {
               
-                author?.booksIsWritten.Remove(bookIDtoDelete);
-                MirrorChangesToProjectRoot("LibraryData.json");
+                author.booksIsWritten.Remove(bookIDtoDelete);
                 SaveAllDataAndExit();
+                MirrorChangesToProjectRoot("LibraryData.json");
+
                 Console.WriteLine("Book has been deleted.");
             
             }
@@ -184,8 +195,9 @@ namespace Inlemningsuppgift03
             }
             authors.Remove(author);
             books.RemoveAll(book => book.AuthorName == author.AuthorName);
-            MirrorChangesToProjectRoot("LibraryData.json");
             SaveAllDataAndExit();
+            MirrorChangesToProjectRoot("LibraryData.json");
+
             Console.WriteLine("Author and their books has been deleted.");
 
         }
@@ -330,8 +342,8 @@ namespace Inlemningsuppgift03
             if (File.Exists(dataJsonFilePath))
             
             {
-                string dataJsonFilePath = "LibraryData.json";
                 string alldatasomJSOType = File.ReadAllText(dataJsonFilePath);
+
                 MinLillaDB minLillaDB = JsonSerializer.Deserialize<MinLillaDB>(alldatasomJSOType)!;
                 List<Book> allbook = minLillaDB.AllbooksfromDB;
                 List<Author> allauthors = minLillaDB.allaAuthorsDatafromDB;
@@ -343,12 +355,14 @@ namespace Inlemningsuppgift03
 
         public void SaveAllDataAndExit() 
         {
+                minLillaDB.AllbooksfromDB = books;
+                minLillaDB.allaAuthorsDatafromDB = authors;
+           
+                string updatedlillaDB = JsonSerializer.Serialize(minLillaDB, new JsonSerializerOptions { WriteIndented = true });
 
-            string updatedlillaDB = JsonSerializer.Serialize(minLillaDB, new JsonSerializerOptions { WriteIndented = true });
+                File.WriteAllText(dataJsonFilePath, updatedlillaDB);
 
-            File.WriteAllText(dataJsonFilePath, updatedlillaDB);
-
-            Console.WriteLine("the daata has been saved ");
+                Console.WriteLine("the data has been saved ");
 
 
         }
@@ -393,69 +407,69 @@ namespace Inlemningsuppgift03
 
         
 
-        public void SortAllBookByYearTitleOrAuthor(string OptingSotr)
-        {
-            IEnumerable<Book> sortedBooks;
+        //public void SortAllBookByYearTitleOrAuthor(string OptingSotr)
+        //{
+        //    IEnumerable<Book> sortedBooks;
 
-            switch (OptingSotr.ToLower()) 
-            {
-                case "Year":
-                    sortedBooks = books.OrderBy(book =>book.PublishedYear).ToList();
-                    break;
-                case "Title":
-                    sortedBooks = books.OrderBy(book => book.BookTitle).ToList();
-                    break;
-                case "author":
-                    sortedBooks = books.OrderBy(book => book.AuthorName).ToList();
-                    break;
+        //    switch (OptingSotr.ToLower()) 
+        //    {
+        //        case "Year":
+        //            sortedBooks = books.OrderBy(book =>book.PublishedYear).ToList();
+        //            break;
+        //        case "Title":
+        //            sortedBooks = books.OrderBy(book => book.BookTitle).ToList();
+        //            break;
+        //        case "author":
+        //            sortedBooks = books.OrderBy(book => book.AuthorName).ToList();
+        //            break;
 
-                default:
-                    Console.WriteLine("Invalid option. Please choose the correct option (year,title or author)");
-                    return;
-            }
+        //        default:
+        //            Console.WriteLine("Invalid option. Please choose the correct option (year,title or author)");
+        //            return;
+        //    }
 
-            Console.WriteLine(" all books are sorted by " + OptingSotr + ":");
-            foreach (Book book in sortedBooks) 
-            {
-                Console.WriteLine($"{book.BookTitle} written by {book.AuthorName} published in {book.PublishedYear}");
-            }
+        //    Console.WriteLine(" all books are sorted by " + OptingSotr + ":");
+        //    foreach (Book book in sortedBooks) 
+        //    {
+        //        Console.WriteLine($"{book.BookTitle} written by {book.AuthorName} published in {book.PublishedYear}");
+        //    }
                
-        }
+        //}
 
-        public void AddRatingToBook() 
-        {
-            Console.WriteLine("Enter the ID of the book that you want to rate: ");
-            if (int.TryParse(Console.ReadLine(), out int addRatingToBook))
-            {
-                var book = books.FirstOrDefault(book => book.BookId == addRatingToBook);
-                if (book != null)
-                {
-                    Console.WriteLine("enter rating between 1 - 5 :");
-                    if (int.TryParse(Console.ReadLine(), out int rating))
-                    {
+        //public void AddRatingToBook() 
+        //{
+        //    Console.WriteLine("Enter the ID of the book that you want to rate: ");
+        //    if (int.TryParse(Console.ReadLine(), out int addRatingToBook))
+        //    {
+        //        var book = books.FirstOrDefault(book => book.BookId == addRatingToBook);
+        //        if (book != null)
+        //        {
+        //            Console.WriteLine("enter rating between 1 - 5 :");
+        //            if (int.TryParse(Console.ReadLine(), out int rating))
+        //            {
 
-                        book.AddRating(rating);
+        //                book.AddRating(rating);
 
-                    }
-                    else
-                    {
-                        Console.WriteLine("The entered data mist be numeric value");
+        //            }
+        //            else
+        //            {
+        //                Console.WriteLine("The entered data mist be numeric value");
 
-                    }
+        //            }
 
 
-                }
-                else
-                {
-                    Console.WriteLine("The book you want to rate  is not found. ");
-                }
+        //        }
+        //        else
+        //        {
+        //            Console.WriteLine("The book you want to rate  is not found. ");
+        //        }
 
-            }
-            else 
-            {
-                Console.WriteLine("Invalid book ID ");
-            }
-        }
+        //    }
+        //    else 
+        //    {
+        //        Console.WriteLine("Invalid book ID ");
+        //    }
+        //}
         
 
 static void MirrorChangesToProjectRoot(string fileName)
