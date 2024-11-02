@@ -1,0 +1,91 @@
+{
+
+
+  "Books": [
+
+    {
+      "BookId": 1,
+      "BookTitle": "Where the Wild Things Are",
+      "AuthorName": "Maurice Sendak",
+      "Genre": "Fantasy",
+      "PublishedYear": 1969,
+      "ISBNCode": 111,
+      "Ratings": [ 5 ]
+
+
+    },
+
+    {
+      "BookId": 2,
+      "BookTitle": "Charlotte's Web",
+      "AuthorName": "E. B. White",
+      "Genre": "Classic",
+      "PublishedYear": 1952,
+      "ISBNCode": 222,
+      "Ratings": [ 4 ]
+    },
+
+    {
+      "BookId": 3,
+      "BookTitle": "Goodnight Moon",
+      "AuthorName": "Margaret Wise Brown",
+      "Genre": "Bedtime Story",
+      "PublishedYear": 1947,
+      "ISBNCode": 333,
+      "Ratings": [ 3 ]
+    },
+
+    {
+      "BookId": 4,
+      "BookTitle": "The Very Hungry Caterpillar",
+      "AuthorName": "Eric Carle",
+      "Genre": "Educational",
+      "PublishedYear": 1969,
+      "ISBNCode": 444,
+      "Ratings": [ 2 ]
+
+
+      },
+
+    {
+      "BookId": 5,
+      "BookTitle": "Hoot Owl, Master of Disguise",
+      "AuthorName": "Sean Taylor",
+      "Genre": "Bedtime Story",
+      "PublishedYear": 2021,
+      "ISBNCode": 555,
+      "Ratings": [ 3]
+    }
+
+  ],
+
+  "Authors": [
+
+    {
+      "AuthorId": 1,
+      "AuthorName": "Maurice Sendak",
+      "AuthorsCountry": "United States"
+    },
+    {
+      "AuthorId": 2,
+      "AuthorName": "E. B. White",
+      "AuthorsCountry": "United States"
+    },
+    {
+      "AuthorId": 3,
+      "AuthorName": "Margaret Wise Brown",
+      "AuthorsCountry": "United States"
+    },
+    {
+      "AuthorId": 4,
+      "AuthorName": "Eric Carle",
+      "AuthorsCountry": "United States"
+    },
+    {
+      "AuthorId": 5,
+      "AuthorName": "Sean Taylor",
+      "AuthorsCountry": "United States"
+    }
+
+  ]
+}
