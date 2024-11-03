@@ -11,6 +11,7 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 using System.Xml.Linq;
+using static System.Reflection.Metadata.BlobBuilder;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace Inlemningsuppgift03
@@ -19,25 +20,12 @@ namespace Inlemningsuppgift03
 
     public class LibrarySystem
     {
-        MinLillaDB minLillaDB = new MinLillaDB();
-
-        public List<Book>books = new List<Book>();
-        public List<Author> authors = new List<Author>();
-        public string dataJsonFilePath = "LibraryData.json";
-
-        public LibrarySystem() 
-        {
-
-           DataLoading();
+       
+        public void Addnewbook(List<Book> books, List<Author>authors) 
         
-        }
-        
-
-        public void Addnewbook(List<Book> books) 
         {
             string dataJsonFilePath = "LibraryData.json";
             string alldatasomJSOType = File.ReadAllText(dataJsonFilePath);
-
             var loaded = JsonSerializer.Deserialize<MinLillaDB>(alldatasomJSOType)!;
 
             Console.WriteLine("------Please, enter all book's details------\n");
@@ -64,13 +52,13 @@ namespace Inlemningsuppgift03
             
             Console.WriteLine("Enter Published Year:");
 
-            if (!int.TryParse(Console.ReadLine(), out int newPublishedYear))
+            
+           if (!int.TryParse(Console.ReadLine(), out int newPublishedYear))
             {
                 Console.WriteLine("Invalid input for Published Year. Please enter a valid number.");
                 return;
             }
 
-            //int newPublishedYear = Convert.ToInt32( Console.ReadLine())!;
 
             Console.WriteLine("Enter ISBN Code:");
 
@@ -79,9 +67,11 @@ namespace Inlemningsuppgift03
                 Console.WriteLine("Invalid input for ISBN Code. Please enter a valid number.");
                 return;
             }
-            // int newISBNCode = Convert.ToInt32(Console.ReadLine())!;
 
-            Book newBook = new(books.Count + 1, newBookTitle, newAuthorName, newGenre, newPublishedYear, newISBNCode, [4])
+           
+
+
+        Book newBook = new(books.Count + 1, newBookTitle, newAuthorName, newGenre, newPublishedYear, newISBNCode)
             {
 
                 BookId = books.Count+1,
@@ -90,24 +80,24 @@ namespace Inlemningsuppgift03
                 Genre = newGenre,
                 PublishedYear = newPublishedYear,
                 ISBNCode = newISBNCode
+               
 
             };
 
            books.Add(newBook);
            author.booksIsWritten.Add(newBook.BookId);
-           SaveAllDataAndExit();
+           SaveAllDataAndExit(books,authors);
            MirrorChangesToProjectRoot("LibraryData.json");
 
             Console.WriteLine($"The book {newBookTitle} added successfully.");
 
-
-            string updatedlillaDB = JsonSerializer.Serialize(minLillaDB, new JsonSerializerOptions { WriteIndented = true });
+            string updatedlillaDB = JsonSerializer.Serialize(loaded, new JsonSerializerOptions { WriteIndented = true });
 
             File.WriteAllText(dataJsonFilePath, updatedlillaDB);
 
         }
 
-        public void AddnewAuthor(List<Author> authors) 
+        public void AddnewAuthor(List<Book>books,List<Author> authors) 
         
        {
 
@@ -123,7 +113,6 @@ namespace Inlemningsuppgift03
 
             string dataJsonFilePath = "LibraryData.json";
             string alldatasomJSOType = File.ReadAllText(dataJsonFilePath);
-
             var loaded = JsonSerializer.Deserialize<MinLillaDB>(alldatasomJSOType)!;
 
             Author newAuthor = new (authors.Count + 1, newAuthorName, newAuthorsCountry)
@@ -134,12 +123,12 @@ namespace Inlemningsuppgift03
             };
 
             authors.Add(newAuthor);
-            SaveAllDataAndExit();
+            SaveAllDataAndExit(books,authors);
             MirrorChangesToProjectRoot("LibraryData.json");
 
             Console.WriteLine("Auther added successfully");
 
-            string updatedlillaDB = JsonSerializer.Serialize(minLillaDB, new JsonSerializerOptions { WriteIndented = true });
+            string updatedlillaDB = JsonSerializer.Serialize(loaded, new JsonSerializerOptions { WriteIndented = true });
 
             File.WriteAllText(dataJsonFilePath, updatedlillaDB);
 
@@ -156,15 +145,15 @@ namespace Inlemningsuppgift03
                 Console.WriteLine("Book not found");
                 return;
             }
-              book.BookTitle = Prompt($"Enter new title of {book.BookTitle}:",book.BookTitle);
-              book.Genre = Prompt($"Enter new genre of {book.Genre}:", book.Genre);
+              book.BookTitle = Prompt($"Enter new title of the current{book.BookTitle}:",book.BookTitle);
+              book.Genre = Prompt($"Enter new genre of the current {book.Genre}:", book.Genre);
               book.PublishedYear = int.Parse(Prompt($"Enter new publication year of the current {book.PublishedYear}:", book.PublishedYear.ToString()));
-            SaveAllDataAndExit();
-            MirrorChangesToProjectRoot("LibraryData.json");
+              SaveAllDataAndExit(books, authors);
+             MirrorChangesToProjectRoot("LibraryData.json");
 
-            Console.WriteLine("Book details updated");
+              Console.WriteLine("Book details updated");
         }
-        public void UpdateAuthorDetails(List<Author> authors) 
+        public void UpdateAuthorDetails(List<Book>books, List<Author> authors) 
         {
             int updatedAuthorID = int.Parse(Prompt("Enter the author Id number that you want to update:"));
             var author = authors.FirstOrDefault(author => author.AuthorId == updatedAuthorID);
@@ -173,9 +162,9 @@ namespace Inlemningsuppgift03
                 Console.WriteLine("Author not found");
                 return;
             }
-             author.AuthorName =Prompt($"Enter new Author corrent name is: {author.AuthorName}:",author.AuthorName);
-             author.AuthorsCountry = Prompt($"Enter new country corrent country is {author.AuthorsCountry}", author.AuthorsCountry);
-            SaveAllDataAndExit();
+             author.AuthorName =Prompt($"Enter new Author the corrent name is: {author.AuthorName}:",author.AuthorName);
+             author.AuthorsCountry = Prompt($"Enter new country the corrent country is {author.AuthorsCountry}", author.AuthorsCountry);
+            SaveAllDataAndExit(books, authors);
             MirrorChangesToProjectRoot("LibraryData.json");
 
             Console.WriteLine("Author has been updated.");
@@ -184,11 +173,10 @@ namespace Inlemningsuppgift03
 
 
 
-        public void DeleteBook(List<Book>books) 
+        public void DeleteBook(List<Book>books,List<Author>authors) 
         {
             int bookIDtoDelete = int.Parse(Prompt("Enter the book ID that you want to delete:"));
-            DataLoading();
-                     string dataJsonFilePath = "LibraryData.json";
+            string dataJsonFilePath = "LibraryData.json";
             string alldatasomJSOType = File.ReadAllText(dataJsonFilePath);
 
             var loaded = JsonSerializer.Deserialize<MinLillaDB>(alldatasomJSOType)!;
@@ -207,11 +195,11 @@ namespace Inlemningsuppgift03
             {
               
                 author.booksIsWritten.Remove(bookIDtoDelete);
-                SaveAllDataAndExit();
+                SaveAllDataAndExit(books, authors);
                 MirrorChangesToProjectRoot("LibraryData.json");
 
                 Console.WriteLine("Book has been deleted.");
-                string updatedlillaDB = JsonSerializer.Serialize(minLillaDB, new JsonSerializerOptions { WriteIndented = true });
+                string updatedlillaDB = JsonSerializer.Serialize(loaded, new JsonSerializerOptions { WriteIndented = true });
 
                 File.WriteAllText(dataJsonFilePath, updatedlillaDB);
 
@@ -219,7 +207,7 @@ namespace Inlemningsuppgift03
 
 
         }
-        public void DeleteAuthor(List<Author>authors) 
+        public void DeleteAuthor(List<Book>books,List<Author>authors) 
         {
             int authorIdToDelet = int.Parse(Prompt("Enter the author Id to delete:"));
             var author = authors.FirstOrDefault(author=>author.AuthorId == authorIdToDelet);
@@ -232,7 +220,7 @@ namespace Inlemningsuppgift03
             }
             authors.Remove(author);
             books.RemoveAll(book => book.AuthorName == author.AuthorName);
-            SaveAllDataAndExit();
+            SaveAllDataAndExit(books, authors);
             MirrorChangesToProjectRoot("LibraryData.json");
 
             Console.WriteLine("Author and their books has been deleted.");
@@ -271,6 +259,7 @@ namespace Inlemningsuppgift03
             Console.WriteLine("5. Sort book by Publication year");
             Console.WriteLine("6 Sort book by book Title");
             Console.WriteLine("7. Sort book by Author name");
+            Console.WriteLine("8. Add Rating to a Book ");
             Console.WriteLine("Choose one Option");
 
 
@@ -355,6 +344,13 @@ namespace Inlemningsuppgift03
                     DisplaySortingBook(sortedBooks);
                     break;
 
+                case "8":
+                    AddRatingToBook(books);
+                    DisplaySortingBook(sortedBooks);
+                    SaveAllDataAndExit(books, authors);
+                    MirrorChangesToProjectRoot("LibraryData.json");
+                    break;
+
 
             }
 
@@ -373,31 +369,24 @@ namespace Inlemningsuppgift03
                 Console.WriteLine($"{book.BookId} : {book.BookTitle} by {book.AuthorName} , {book.Genre} published in  {book.PublishedYear}, ISBN: {book.ISBNCode}, Average Rating: {book.BooksAveragerating}");
         }
 
-        public void DataLoading() 
+        public void DataLoading(List<Book>books, List<Author>authors) 
         
         {
+            string dataJsonFilePath = "LibraryData.json";
 
 
             if (File.Exists(dataJsonFilePath))
 
             {
-              string alldatasomJSOType = File.ReadAllText(dataJsonFilePath);
+               string alldatasomJSOType = File.ReadAllText(dataJsonFilePath);
 
-             var loaded = JsonSerializer.Deserialize<MinLillaDB>(alldatasomJSOType)!;
+               MinLillaDB minLillaDB = JsonSerializer.Deserialize<MinLillaDB>(alldatasomJSOType)!;
 
+               books = minLillaDB.AllbooksfromDB ?? new List<Book>();
+               authors = minLillaDB.allaAuthorsDatafromDB ?? new List<Author>();
+             
 
-              //  MinLillaDB minLillaDB = JsonSerializer.Deserialize<MinLillaDB>(alldatasomJSOType)!;
-
-
-
-              if (minLillaDB != null)
-              {
-                  books = minLillaDB.AllbooksfromDB ?? new List<Book>();
-                  authors = minLillaDB.allaAuthorsDatafromDB ?? new List<Author>();
-              }
-              // List<Book> books = minLillaDB.AllbooksfromDB;
-              // List<Author> authors = minLillaDB.allaAuthorsDatafromDB;
-                // MirrorChangesToProjectRoot("LibraryData.json");
+               MirrorChangesToProjectRoot("LibraryData.json");
 
             }
             else 
@@ -410,11 +399,17 @@ namespace Inlemningsuppgift03
         }
 
 
-        public void SaveAllDataAndExit() 
+        public void SaveAllDataAndExit(List<Book>books,List<Author>authors)
         {
-                minLillaDB.AllbooksfromDB = books;
 
-                minLillaDB.allaAuthorsDatafromDB = authors;
+            string dataJsonFilePath = "LibraryData.json";
+
+            MinLillaDB minLillaDB = new MinLillaDB
+            {
+                AllbooksfromDB = books,
+                allaAuthorsDatafromDB = authors,    
+
+            };
            
                 string updatedlillaDB = JsonSerializer.Serialize(minLillaDB, new JsonSerializerOptions { WriteIndented = true });
 
@@ -422,14 +417,10 @@ namespace Inlemningsuppgift03
 
                 Console.WriteLine("The data has been saved ");
 
-
         }
 
 
-
-        //Lista alla böcker med ett genomsnittligt betyg över ett användarspecificerat tröskelvärde.
-
-        public void ListAllBooksAboveRatingThreshold()
+        public void ListAllBooksAboveRatingThreshold(List<Book>books)
         {
 
             Console.WriteLine("Enter The rating threshold  1-5 : ");
@@ -466,40 +457,41 @@ namespace Inlemningsuppgift03
         
 
 
-        //public void AddRatingToBook() 
-        //{
-        //    Console.WriteLine("Enter the ID of the book that you want to rate: ");
-        //    if (int.TryParse(Console.ReadLine(), out int addRatingToBook))
-        //    {
-        //        var book = books.FirstOrDefault(book => book.BookId == addRatingToBook);
-        //        if (book != null)
-        //        {
-        //            Console.WriteLine("enter rating between 1 - 5 :");
-        //            if (int.TryParse(Console.ReadLine(), out int rating))
-        //            {
+        public void AddRatingToBook(List<Book>books) 
+        {
+            Console.WriteLine("Enter the ID of the book that you want to rate: ");
+             if
+                (int.TryParse(Console.ReadLine(), out int addRatingToBook))
+             {
+                  var book = books.FirstOrDefault(book => book.BookId == addRatingToBook);
+                 if (book != null)
+                 {
+                    Console.WriteLine("enter rating between 1 - 5 :");
+                    if (int.TryParse(Console.ReadLine(), out int rating))
+                    {
 
-        //                book.AddRating(rating);
+                              book.AddRating(rating);
 
-        //            }
-        //            else
-        //            {
-        //                Console.WriteLine("The entered data mist be numeric value");
+                    }
+                    else
+                    {
+                        Console.WriteLine("The entered data mist be numeric value");
 
-        //            }
+                    }
 
 
-        //        }
-        //        else
-        //        {
-        //            Console.WriteLine("The book you want to rate  is not found. ");
-        //        }
+                 }
+                  else
+                  {
+                   Console.WriteLine("The book you want to rate  is not found. ");
+                  }
 
-        //    }
-        //    else 
-        //    {
-        //        Console.WriteLine("Invalid book ID ");
-        //    }
-        //}
+             }
+              else 
+              {
+              Console.WriteLine("Invalid book ID ");
+              }
+        }
         
 
 static void MirrorChangesToProjectRoot(string fileName)

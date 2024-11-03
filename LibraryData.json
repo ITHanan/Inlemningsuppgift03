@@ -1,4 +1,151 @@
 {
-  "Books": [],
-  "Authors": []
+  "Books": [
+    {
+      "BookId": 1,
+      "BookTitle": "Where the Wild Things Are",
+      "AuthorName": "Maurice Sendak",
+      "Genre": "Fantasy",
+      "PublishedYear": 1969,
+      "ISBNCode": 111,
+      "Ratings": [
+        5
+      ],
+      "BooksAveragerating": 5
+    },
+    {
+      "BookId": 2,
+      "BookTitle": "Charlotte\u0027s Web",
+      "AuthorName": "E. B. White",
+      "Genre": "Classic",
+      "PublishedYear": 1952,
+      "ISBNCode": 222,
+      "Ratings": [
+        4
+      ],
+      "BooksAveragerating": 4
+    },
+    {
+      "BookId": 3,
+      "BookTitle": "Goodnight Moon",
+      "AuthorName": "Margaret Wise Brown",
+      "Genre": "Bedtime Story",
+      "PublishedYear": 1947,
+      "ISBNCode": 333,
+      "Ratings": [
+        3
+      ],
+      "BooksAveragerating": 3
+    },
+    {
+      "BookId": 4,
+      "BookTitle": "The Very Hungry Caterpillar",
+      "AuthorName": "Eric Carle",
+      "Genre": "Educational",
+      "PublishedYear": 1969,
+      "ISBNCode": 444,
+      "Ratings": [
+        2,
+        4
+      ],
+      "BooksAveragerating": 3
+    },
+    {
+      "BookId": 5,
+      "BookTitle": "Hoot Owl, Master of Disguise",
+      "AuthorName": "Sean Taylor",
+      "Genre": "Bedtime Story",
+      "PublishedYear": 2021,
+      "ISBNCode": 555,
+      "Ratings": [
+        3
+      ],
+      "BooksAveragerating": 3
+    },
+    {
+      "BookId": 6,
+      "BookTitle": "Pax",
+      "AuthorName": "sara",
+      "Genre": "Classic",
+      "PublishedYear": 2024,
+      "ISBNCode": 222,
+      "Ratings": [
+        3
+      ],
+      "BooksAveragerating": 3
+    },
+    {
+      "BookId": 7,
+      "BookTitle": "see",
+      "AuthorName": "mira",
+      "Genre": "drama",
+      "PublishedYear": 2029,
+      "ISBNCode": 876,
+      "Ratings": [
+        4
+      ],
+      "BooksAveragerating": 4
+    },
+    {
+      "BookId": 8,
+      "BookTitle": "Recipes",
+      "AuthorName": "mirra",
+      "Genre": "food book",
+      "PublishedYear": 2023,
+      "ISBNCode": 999,
+      "Ratings": [],
+      "BooksAveragerating": 0
+    }
+  ],
+  "Authors": [
+    {
+      "AuthorId": 1,
+      "AuthorName": "Maurice Sendak",
+      "AuthorsCountry": "United States",
+      "booksIsWritten": []
+    },
+    {
+      "AuthorId": 2,
+      "AuthorName": "E. B. White",
+      "AuthorsCountry": "United States",
+      "booksIsWritten": []
+    },
+    {
+      "AuthorId": 3,
+      "AuthorName": "Margaret Wise Brown",
+      "AuthorsCountry": "United States",
+      "booksIsWritten": []
+    },
+    {
+      "AuthorId": 4,
+      "AuthorName": "Eric Carle",
+      "AuthorsCountry": "United States",
+      "booksIsWritten": []
+    },
+    {
+      "AuthorId": 5,
+      "AuthorName": "Sean Taylor",
+      "AuthorsCountry": "United States",
+      "booksIsWritten": []
+    },
+    {
+      "AuthorId": 6,
+      "AuthorName": "sara",
+      "AuthorsCountry": "sweden",
+      "booksIsWritten": []
+    },
+    {
+      "AuthorId": 7,
+      "AuthorName": "mira",
+      "AuthorsCountry": "sweden",
+      "booksIsWritten": []
+    },
+    {
+      "AuthorId": 8,
+      "AuthorName": "mirra",
+      "AuthorsCountry": "canada",
+      "booksIsWritten": [
+        8
+      ]
+    }
+  ]
 }

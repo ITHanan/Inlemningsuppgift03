@@ -34,10 +34,10 @@ namespace Inlemningsuppgift03
                  
                     case 1:
 
-                        librarySystem.Addnewbook(minLillaDB.AllbooksfromDB);
+                        librarySystem.Addnewbook(minLillaDB.AllbooksfromDB,minLillaDB.allaAuthorsDatafromDB);
                         break;
                     case 2:
-                        librarySystem.AddnewAuthor(minLillaDB.allaAuthorsDatafromDB);
+                        librarySystem.AddnewAuthor(minLillaDB.AllbooksfromDB, minLillaDB.allaAuthorsDatafromDB);
 
                         break;
                     case 3:
@@ -46,15 +46,15 @@ namespace Inlemningsuppgift03
                         break;
                     case 4:
 
-                        librarySystem.UpdateAuthorDetails(minLillaDB.allaAuthorsDatafromDB);
+                        librarySystem.UpdateAuthorDetails(minLillaDB.AllbooksfromDB, minLillaDB.allaAuthorsDatafromDB);
                         break;
                     case 5:
 
-                        librarySystem.DeleteBook(minLillaDB.AllbooksfromDB);
+                        librarySystem.DeleteBook(minLillaDB.AllbooksfromDB, minLillaDB.allaAuthorsDatafromDB);
                         break;
                     case 6:
 
-                        librarySystem.DeleteAuthor(minLillaDB.allaAuthorsDatafromDB);
+                        librarySystem.DeleteAuthor(minLillaDB.AllbooksfromDB,minLillaDB.allaAuthorsDatafromDB);
                         break;
                     case 7:
 
@@ -64,18 +64,10 @@ namespace Inlemningsuppgift03
                         librarySystem.SearchAndFillterBooks(minLillaDB.AllbooksfromDB, minLillaDB.allaAuthorsDatafromDB); 
                         break;
                     case 9:
-                        librarySystem.SaveAllDataAndExit();
+                        librarySystem.SaveAllDataAndExit(minLillaDB.AllbooksfromDB, minLillaDB.allaAuthorsDatafromDB);
 
                         break;
-                    //case 10:
-
-                    //    librarySystem.AddRatingToBook();
-                    //    break;
-
-                    case 11:
-                        librarySystem.SaveAllDataAndExit();
-                        break;
-
+  
                     case 0:
                         Console.WriteLine("Exit...");
                         running = false;
@@ -96,34 +88,6 @@ namespace Inlemningsuppgift03
 
 
             }
-
-
-
-
-            //List<Book> AllBookWithPublishedYear = books.Where(book => book.PublishedYear == 1969).ToList();
-
-            // AllBookWithPublishedYear.ForEach(book => Console.WriteLine(book.BookTitle));
-
-
-
-            // Console.WriteLine("Enter The rating  1-5 : ");
-
-            // double ratingFromUser= Convert.ToDouble(Console.ReadLine());
-
-            // if (ratingFromUser >=1 && ratingFromUser <= 5 ) {
-            //     List<Book> BooksAverageThreshold = books.Where(book => book.BooksAveragerating > ratingFromUser).ToList();
-            // }
-
-            // List<Book> sortedBookByTitle = books.OrderBy(book => book.BookTitle).ToList();
-
-
-            // allbook.Add(new Book(6, "newbook", "Hanan", "new", 2024, 666, [4]));
-
-            // string updatedlillaDB = JsonSerializer.Serialize(minLillaDB, new JsonSerializerOptions { WriteIndented = true }); 
-
-            // File.WriteAllText(dataJsonFilePath, updatedlillaDB);
-
-
 
 
         }
