@@ -141,10 +141,7 @@ namespace Inlemningsuppgift03
             Console.WriteLine("6. Delete Author");
             Console.WriteLine("7. List All Books and Author");
             Console.WriteLine("8. Search and Filter Books");
-            Console.WriteLine("9. Sort Book");
-            Console.WriteLine("10. Add Rating To Book");
-            Console.WriteLine("11. Data Loading");
-            Console.WriteLine("12. saving Data");
+            Console.WriteLine("9. Save All Data And Exit");
             Console.WriteLine("0. Exit");
 
         }
