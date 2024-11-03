@@ -413,6 +413,8 @@ namespace Inlemningsuppgift03
 
                 Console.WriteLine("The data has been saved ");
 
+                MirrorChangesToProjectRoot("LibraryData.json");
+
         }
 
 
