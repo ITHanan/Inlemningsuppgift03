@@ -1,12 +1,4 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Diagnostics.Metrics;
-using System.Linq;
-using System.Net;
-using System.Security.Cryptography.X509Certificates;
-using System.Text;
+﻿
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
@@ -146,10 +138,14 @@ namespace Inlemningsuppgift03
                 return;
             }
               book.BookTitle = Prompt($"Enter new title of the current{book.BookTitle}:",book.BookTitle);
+
               book.Genre = Prompt($"Enter new genre of the current {book.Genre}:", book.Genre);
+
               book.PublishedYear = int.Parse(Prompt($"Enter new publication year of the current {book.PublishedYear}:", book.PublishedYear.ToString()));
+
               SaveAllDataAndExit(books, authors);
-             MirrorChangesToProjectRoot("LibraryData.json");
+
+              MirrorChangesToProjectRoot("LibraryData.json");
 
               Console.WriteLine("Book details updated");
         }
