@@ -383,7 +383,6 @@ namespace Inlemningsuppgift03
 
         public void SaveAllDataandExit(MinLillaDB minLillaDB) 
         {
-            bool running = true;
             SaveAllData(minLillaDB);
             MirrorChangesToProjectRoot("LibraryData.json");
             Console.WriteLine("Do you want to complete? (J/N)");
