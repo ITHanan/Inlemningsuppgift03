@@ -48,7 +48,7 @@ namespace Inlemningsuppgift03
 
 
 
-        public Book(int bookId, string bookTitle, string authorName, string genre, int publishedYear, int iSBNCode)
+        public Book(int bookId, string bookTitle, string authorName, string genre, int publishedYear, int iSBNCode, List<int>ratings)
         {
             BookId = bookId;
             BookTitle = bookTitle;
@@ -56,6 +56,7 @@ namespace Inlemningsuppgift03
             Genre = genre;
             PublishedYear = publishedYear;
             ISBNCode = iSBNCode;
+            Ratings = ratings;
         }
     }
 }

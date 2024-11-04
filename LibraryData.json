@@ -20,9 +20,10 @@
       "PublishedYear": 1952,
       "ISBNCode": 222,
       "Ratings": [
-        4
+        4,
+        3
       ],
-      "BooksAveragerating": 4
+      "BooksAveragerating": 3.5
     },
     {
       "BookId": 3,
@@ -92,8 +93,11 @@
       "Genre": "food book",
       "PublishedYear": 2023,
       "ISBNCode": 999,
-      "Ratings": [],
-      "BooksAveragerating": 0
+      "Ratings": [
+        3,
+        2
+      ],
+      "BooksAveragerating": 2.5
     }
   ],
   "Authors": [

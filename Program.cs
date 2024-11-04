@@ -8,15 +8,15 @@ namespace Inlemningsuppgift03
         static void Main(string[] args)
         {
 
-         string dataJsonFilePath = "LibraryData.json";
-         string alldatasomJSOType = File.ReadAllText(dataJsonFilePath);
+            string dataJsonFilePath = "LibraryData.json";
+            string alldatasomJSOType = File.ReadAllText(dataJsonFilePath);
 
-           MinLillaDB minLillaDB = JsonSerializer.Deserialize<MinLillaDB>(alldatasomJSOType)!;
-           LibrarySystem librarySystem = new LibrarySystem();
-           List<Book> books = minLillaDB.AllbooksfromDB;
-           List<Author> authors = minLillaDB.allaAuthorsDatafromDB;
+            MinLillaDB minLillaDB = JsonSerializer.Deserialize<MinLillaDB>(alldatasomJSOType)!;
+            LibrarySystem librarySystem = new LibrarySystem();
+            List<Book> books = minLillaDB.AllbooksfromDB;
+            List<Author> authors = minLillaDB.allaAuthorsDatafromDB;
 
-            
+
 
             bool running = true;
 
@@ -29,10 +29,10 @@ namespace Inlemningsuppgift03
 
                 switch (userInputInt)
                 {
-                 
+
                     case 1:
 
-                        librarySystem.Addnewbook(minLillaDB.AllbooksfromDB,minLillaDB.allaAuthorsDatafromDB);
+                        librarySystem.Addnewbook(minLillaDB.AllbooksfromDB, minLillaDB.allaAuthorsDatafromDB);
                         break;
                     case 2:
                         librarySystem.AddnewAuthor(minLillaDB.AllbooksfromDB, minLillaDB.allaAuthorsDatafromDB);
@@ -40,7 +40,7 @@ namespace Inlemningsuppgift03
                         break;
                     case 3:
 
-                        librarySystem.UpdateBookDetails(minLillaDB.AllbooksfromDB,minLillaDB.allaAuthorsDatafromDB);
+                        librarySystem.UpdateBookDetails(minLillaDB.AllbooksfromDB, minLillaDB.allaAuthorsDatafromDB);
                         break;
                     case 4:
 
@@ -52,20 +52,20 @@ namespace Inlemningsuppgift03
                         break;
                     case 6:
 
-                        librarySystem.DeleteAuthor(minLillaDB.AllbooksfromDB,minLillaDB.allaAuthorsDatafromDB);
+                        librarySystem.DeleteAuthor(minLillaDB.AllbooksfromDB, minLillaDB.allaAuthorsDatafromDB);
                         break;
                     case 7:
 
-                        librarySystem.ListAll(minLillaDB.AllbooksfromDB,minLillaDB.allaAuthorsDatafromDB);
+                        librarySystem.ListAll(minLillaDB.AllbooksfromDB, minLillaDB.allaAuthorsDatafromDB);
                         break;
                     case 8:
-                        librarySystem.SearchAndFillterBooks(minLillaDB.AllbooksfromDB, minLillaDB.allaAuthorsDatafromDB); 
+                        librarySystem.SearchAndFillterBooks(minLillaDB.AllbooksfromDB, minLillaDB.allaAuthorsDatafromDB);
                         break;
                     case 9:
                         librarySystem.SaveAllDataAndExit(minLillaDB.AllbooksfromDB, minLillaDB.allaAuthorsDatafromDB);
 
                         break;
-  
+
                     case 0:
                         Console.WriteLine("Exit...");
                         running = false;
@@ -76,7 +76,7 @@ namespace Inlemningsuppgift03
 
 
                 }
-                
+
                 Console.WriteLine("Do you want to complete? (J/N)");
                 string continueChoice = Console.ReadLine()!;
                 if (continueChoice.ToUpper() == "N")
