@@ -280,9 +280,6 @@ namespace Inlemningsuppgift03
                     booksfilter = books.Where(book => book.PublishedYear == year);
                     DisplayFiltringBooks(booksfilter);
 
-                    List<Book> AllBookWithPublishedYear = books.Where(book => book.PublishedYear == 1969).ToList();
-
-                    AllBookWithPublishedYear.ForEach(book => Console.WriteLine(book.BookTitle));
                     break;
 
                 case "4":
