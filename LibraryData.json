@@ -98,6 +98,18 @@
         2
       ],
       "BooksAveragerating": 2.5
+    },
+    {
+      "BookId": 9,
+      "BookTitle": "C#",
+      "AuthorName": "siri",
+      "Genre": "IT Book",
+      "PublishedYear": 2014,
+      "ISBNCode": 555,
+      "Ratings": [
+        4
+      ],
+      "BooksAveragerating": 4
     }
   ],
   "Authors": [
@@ -149,6 +161,14 @@
       "AuthorsCountry": "canada",
       "booksIsWritten": [
         8
+      ]
+    },
+    {
+      "AuthorId": 9,
+      "AuthorName": "siri",
+      "AuthorsCountry": "USA",
+      "booksIsWritten": [
+        9
       ]
     }
   ]

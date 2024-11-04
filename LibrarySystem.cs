@@ -80,11 +80,7 @@ namespace Inlemningsuppgift03
             SaveAllDataAndExit(books, authors);
             MirrorChangesToProjectRoot("LibraryData.json");
 
-            Console.WriteLine($"The book {newBookTitle} added successfully.");
-
-            string updatedlillaDB = JsonSerializer.Serialize(loaded, new JsonSerializerOptions { WriteIndented = true });
-
-            File.WriteAllText(dataJsonFilePath, updatedlillaDB);
+           
 
         }
 
@@ -114,14 +110,12 @@ namespace Inlemningsuppgift03
             };
 
             authors.Add(newAuthor);
+
             SaveAllDataAndExit(books, authors);
             MirrorChangesToProjectRoot("LibraryData.json");
 
             Console.WriteLine("Auther added successfully");
 
-            string updatedlillaDB = JsonSerializer.Serialize(loaded, new JsonSerializerOptions { WriteIndented = true });
-
-            File.WriteAllText(dataJsonFilePath, updatedlillaDB);
 
         }
 
@@ -412,7 +406,7 @@ namespace Inlemningsuppgift03
 
             Console.WriteLine("The data has been saved ");
 
-            MirrorChangesToProjectRoot("LibraryData.json");
+           // MirrorChangesToProjectRoot("LibraryData.json");
 
         }
 
