@@ -75,18 +75,6 @@
       "BooksAveragerating": 3
     },
     {
-      "BookId": 7,
-      "BookTitle": "see",
-      "AuthorName": "mira",
-      "Genre": "drama",
-      "PublishedYear": 2029,
-      "ISBNCode": 876,
-      "Ratings": [
-        4
-      ],
-      "BooksAveragerating": 4
-    },
-    {
       "BookId": 8,
       "BookTitle": "Recipes",
       "AuthorName": "mirra",
@@ -129,65 +117,61 @@
       "AuthorId": 1,
       "AuthorName": "Maurice Sendak",
       "AuthorsCountry": "United States",
-      "booksIsWritten": []
+      "booksIsWrittenIds": []
     },
     {
       "AuthorId": 2,
       "AuthorName": "E. B. White",
       "AuthorsCountry": "United States",
-      "booksIsWritten": []
+      "booksIsWrittenIds": []
     },
     {
       "AuthorId": 3,
       "AuthorName": "Margaret Wise Brown",
       "AuthorsCountry": "United States",
-      "booksIsWritten": []
+      "booksIsWrittenIds": []
     },
     {
       "AuthorId": 4,
       "AuthorName": "Eric Carle",
       "AuthorsCountry": "United States",
-      "booksIsWritten": []
+      "booksIsWrittenIds": []
     },
     {
       "AuthorId": 5,
       "AuthorName": "Sean Taylor",
       "AuthorsCountry": "United States",
-      "booksIsWritten": []
+      "booksIsWrittenIds": []
     },
     {
       "AuthorId": 6,
       "AuthorName": "sara",
       "AuthorsCountry": "sweden",
-      "booksIsWritten": []
+      "booksIsWrittenIds": []
     },
     {
       "AuthorId": 7,
       "AuthorName": "mira",
       "AuthorsCountry": "sweden",
-      "booksIsWritten": []
+      "booksIsWrittenIds": []
     },
     {
       "AuthorId": 8,
       "AuthorName": "mirra",
       "AuthorsCountry": "canada",
-      "booksIsWritten": [
-        8
-      ]
+      "booksIsWrittenIds": []
     },
     {
       "AuthorId": 9,
       "AuthorName": "siri",
       "AuthorsCountry": "USA",
-      "booksIsWritten": [
-        9
-      ]
+      "booksIsWrittenIds": []
     },
     {
       "AuthorId": 10,
       "AuthorName": "Nemo",
       "AuthorsCountry": "sweden",
-      "booksIsWritten": []
+      "booksIsWrittenIds": []
     }
   ]
 }

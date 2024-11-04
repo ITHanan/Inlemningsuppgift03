@@ -58,14 +58,9 @@ namespace Inlemningsuppgift03
                         librarySystem.SearchAndFillterBooks(minLillaDB);
                         break;
                     case 9:
-                        librarySystem.SaveAllDataAndExit(minLillaDB);
-
+                        librarySystem.SaveAllDataandExit(minLillaDB);
                         break;
-
-                    case 0:
-                        Console.WriteLine("Exit...");
-                        running = false;
-                        break;
+                   
                     default:
                         Console.WriteLine("Invalid choice. Please try again!");
                         break;
@@ -73,13 +68,7 @@ namespace Inlemningsuppgift03
 
                 }
 
-                Console.WriteLine("Do you want to complete? (J/N)");
-                string continueChoice = Console.ReadLine()!;
-                if (continueChoice.ToUpper() == "N")
-                {
-                    running = false;
-                }
-
+           
 
             }
 
@@ -99,7 +88,7 @@ namespace Inlemningsuppgift03
             Console.WriteLine("6. Delete Author");
             Console.WriteLine("7. List All Books and Author");
             Console.WriteLine("8. Search and Filter Books");
-            Console.WriteLine("9. Save All Data And Exit");
+            Console.WriteLine("9. Save All Data and Exit");
             Console.WriteLine("0. Exit");
 
         }

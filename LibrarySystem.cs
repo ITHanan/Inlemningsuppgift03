@@ -71,7 +71,7 @@ namespace Inlemningsuppgift03
 
             minLillaDB.AllbooksfromDB.Add(newBook);
             author.booksIsWrittenIds.Add(newBook.BookId);
-            SaveAllDataAndExit(minLillaDB);
+            SaveAllData(minLillaDB);
             MirrorChangesToProjectRoot("LibraryData.json");
 
         }
@@ -79,8 +79,6 @@ namespace Inlemningsuppgift03
         public void AddnewAuthor(MinLillaDB minLillaDB)
 
         {
-
-
             Console.WriteLine("------Please, enter all author's details------\n");
 
             Console.WriteLine("Enter Author's name:");
@@ -98,7 +96,7 @@ namespace Inlemningsuppgift03
 
             minLillaDB.allaAuthorsDatafromDB.Add(newAuthor);
 
-            SaveAllDataAndExit(minLillaDB);
+            SaveAllData(minLillaDB);
             MirrorChangesToProjectRoot("LibraryData.json");
 
             Console.WriteLine("Auther added successfully");
@@ -123,7 +121,7 @@ namespace Inlemningsuppgift03
 
             book.PublishedYear = int.Parse(Prompt($"Enter new publication year of the current {book.PublishedYear}:", book.PublishedYear.ToString()));
 
-            SaveAllDataAndExit(minLillaDB);
+            SaveAllData(minLillaDB);
 
             MirrorChangesToProjectRoot("LibraryData.json");
 
@@ -144,7 +142,7 @@ namespace Inlemningsuppgift03
             }
             author.AuthorName = Prompt($"Enter new Author the corrent name is: {author.AuthorName}:", author.AuthorName);
             author.AuthorsCountry = Prompt($"Enter new country the corrent country is {author.AuthorsCountry}", author.AuthorsCountry);
-            SaveAllDataAndExit(minLillaDB);
+            SaveAllData(minLillaDB);
             MirrorChangesToProjectRoot("LibraryData.json");
 
             Console.WriteLine("Author has been updated.");
@@ -175,7 +173,7 @@ namespace Inlemningsuppgift03
                 Console.WriteLine("Book has been deleted.");
 
             }
-            SaveAllDataAndExit(minLillaDB);
+            SaveAllData(minLillaDB);
             MirrorChangesToProjectRoot("LibraryData.json");
 
 
@@ -197,7 +195,7 @@ namespace Inlemningsuppgift03
             minLillaDB.AllbooksfromDB.RemoveAll(book => book.AuthorName == author.AuthorName);
             Console.WriteLine("Author and their books has been deleted.");
 
-            SaveAllDataAndExit(minLillaDB);
+            SaveAllData(minLillaDB);
             MirrorChangesToProjectRoot("LibraryData.json");
         }
 
@@ -318,7 +316,7 @@ namespace Inlemningsuppgift03
                 case "8":
                     AddRatingToBook(minLillaDB.AllbooksfromDB);
                     DisplaySortingBook(sortedBooks);
-                    SaveAllDataAndExit(minLillaDB);
+                    SaveAllData(minLillaDB);
                     MirrorChangesToProjectRoot("LibraryData.json");
                     break;
 
@@ -370,7 +368,7 @@ namespace Inlemningsuppgift03
         }
 
 
-        public void SaveAllDataAndExit(MinLillaDB minLillaDB)
+        public void SaveAllData(MinLillaDB minLillaDB)
         {
 
             string dataJsonFilePath = "LibraryData.json";
@@ -383,6 +381,21 @@ namespace Inlemningsuppgift03
 
         }
 
+        public void SaveAllDataandExit(MinLillaDB minLillaDB) 
+        {
+            bool running = true;
+            SaveAllData(minLillaDB);
+            MirrorChangesToProjectRoot("LibraryData.json");
+            Console.WriteLine("Do you want to complete? (J/N)");
+            string continueChoice = Console.ReadLine()!;
+            if (continueChoice.ToUpper() == "N")
+            {
+                Environment.Exit(0);
+            }
+
+
+
+        }
 
         public void ListAllBooksAboveRatingThreshold(List<Book> books)
         {
