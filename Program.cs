@@ -13,11 +13,7 @@ namespace Inlemningsuppgift03
 
             MinLillaDB minLillaDB = JsonSerializer.Deserialize<MinLillaDB>(alldatasomJSOType)!;
             LibrarySystem librarySystem = new LibrarySystem();
-            List<Book> books = minLillaDB.AllbooksfromDB;
-            List<Author> authors = minLillaDB.allaAuthorsDatafromDB;
-
-
-
+           
             bool running = true;
 
             while (running)
@@ -32,37 +28,37 @@ namespace Inlemningsuppgift03
 
                     case 1:
 
-                        librarySystem.Addnewbook(minLillaDB.AllbooksfromDB, minLillaDB.allaAuthorsDatafromDB);
+                        librarySystem.Addnewbook(minLillaDB);
                         break;
                     case 2:
-                        librarySystem.AddnewAuthor(minLillaDB.AllbooksfromDB, minLillaDB.allaAuthorsDatafromDB);
+                        librarySystem.AddnewAuthor(minLillaDB);
 
                         break;
                     case 3:
 
-                        librarySystem.UpdateBookDetails(minLillaDB.AllbooksfromDB, minLillaDB.allaAuthorsDatafromDB);
+                        librarySystem.UpdateBookDetails(minLillaDB);
                         break;
                     case 4:
 
-                        librarySystem.UpdateAuthorDetails(minLillaDB.AllbooksfromDB, minLillaDB.allaAuthorsDatafromDB);
+                        librarySystem.UpdateAuthorDetails(minLillaDB);
                         break;
                     case 5:
 
-                        librarySystem.DeleteBook(minLillaDB.AllbooksfromDB, minLillaDB.allaAuthorsDatafromDB);
+                        librarySystem.DeleteBook(minLillaDB);
                         break;
                     case 6:
 
-                        librarySystem.DeleteAuthor(minLillaDB.AllbooksfromDB, minLillaDB.allaAuthorsDatafromDB);
+                        librarySystem.DeleteAuthor(minLillaDB);
                         break;
                     case 7:
 
                         librarySystem.ListAll(minLillaDB.AllbooksfromDB, minLillaDB.allaAuthorsDatafromDB);
                         break;
                     case 8:
-                        librarySystem.SearchAndFillterBooks(minLillaDB.AllbooksfromDB, minLillaDB.allaAuthorsDatafromDB);
+                        librarySystem.SearchAndFillterBooks(minLillaDB);
                         break;
                     case 9:
-                        librarySystem.SaveAllDataAndExit(minLillaDB.AllbooksfromDB, minLillaDB.allaAuthorsDatafromDB);
+                        librarySystem.SaveAllDataAndExit(minLillaDB);
 
                         break;
 

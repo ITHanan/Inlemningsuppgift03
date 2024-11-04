@@ -8,7 +8,7 @@ namespace Inlemningsuppgift03
         public string AuthorName { get; set; }
         public string AuthorsCountry { get; set; }
 
-       public List<int> booksIsWritten { get; set; } = new List<int>();
+       public List<int> booksIsWrittenIds { get; set; } = new List<int>();
 
         public Author(int authorId, string authorName, string authorsCountry) 
         { 

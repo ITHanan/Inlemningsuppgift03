@@ -110,6 +110,18 @@
         4
       ],
       "BooksAveragerating": 4
+    },
+    {
+      "BookId": 11,
+      "BookTitle": "C#",
+      "AuthorName": "Nemo",
+      "Genre": "Educational",
+      "PublishedYear": 2024,
+      "ISBNCode": 1111,
+      "Ratings": [
+        5
+      ],
+      "BooksAveragerating": 5
     }
   ],
   "Authors": [
@@ -170,6 +182,12 @@
       "booksIsWritten": [
         9
       ]
+    },
+    {
+      "AuthorId": 10,
+      "AuthorName": "Nemo",
+      "AuthorsCountry": "sweden",
+      "booksIsWritten": []
     }
   ]
 }
